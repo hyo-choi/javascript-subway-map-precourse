@@ -8,7 +8,7 @@ export default function SubwayManager() {
   this.stations = new StationList();
   this.lines = new LineList();
 
-  initPage();
+  initPage(this);
 }
 
 new SubwayManager();
