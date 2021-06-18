@@ -23,11 +23,11 @@ export default function StationList() {
   this.addStation = (name) => {
     if (!isValidStationName.bind(this)(name)) {
       alert('2글자 이상의 중복되지 않은 이름을 입력해주세요.');
-      return null;
+      return false;
     }
     this.list.push(new Station(name));
     this.setLocalStorage();
-    return name;
+    return true;
   };
 
   this.removeStation = (name, lines) => {
