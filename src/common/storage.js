@@ -18,6 +18,8 @@ export function getStations() {
     array = JSON.parse(stations);
   } catch (error) {
     alert('localStorage data is corrupted');
+  }
+  if (!array) {
     array = [];
   }
   return array;

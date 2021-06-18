@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-undef */
-import toggleStationManagerDiv from '../stationManager/interface.js';
+import { toggleStationManagerDiv } from '../stationManager/interface.js';
 
 const STATION_MANAGER_BUTTON = 'station-manager-button';
 const LINE_MANAGER_BUTTON = 'line-manager-button';

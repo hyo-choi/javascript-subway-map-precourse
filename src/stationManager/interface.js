@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable no-undef */
 import * as elementManager from '../common/interface.js';
+import setStationManagerEvent from './event.js';
 
 const STATION_MANAGER = 'station-manager';
 const STATION_NAME_INPUT = 'station-name-input';
@@ -47,7 +48,7 @@ function makeStationInputDiv() {
   `;
 }
 
-function makeStationManagerDiv(managerObj) {
+function showStationManagerDiv(managerObj) {
   const $app = document.getElementById('app');
   const $div = document.createElement('div');
   $div.id = STATION_MANAGER;
@@ -55,15 +56,23 @@ function makeStationManagerDiv(managerObj) {
   $div.insertAdjacentHTML('afterbegin', makeStationInputDiv());
   $div.insertAdjacentHTML('beforeend', makeStationTableDIv(managerObj));
   $app.appendChild($div);
-  // TODO: setEventListener
+  setStationManagerEvent(managerObj);
 }
 
-export default function toggleStationManagerDiv(managerObj) {
+export function hideStationManagerDiv() {
   const $app = document.getElementById('app');
   const $stationManagerDiv = document.getElementById(STATION_MANAGER);
   if ($stationManagerDiv) {
     $app.removeChild($stationManagerDiv);
-  } else {
-    makeStationManagerDiv(managerObj);
   }
+}
+
+export function toggleStationManagerDiv(managerObj) {
+  const $stationManagerDiv = document.getElementById(STATION_MANAGER);
+  if ($stationManagerDiv) {
+    hideStationManagerDiv();
+  } else {
+    showStationManagerDiv(managerObj);
+  }
+  // TODO: hide other div
 }
