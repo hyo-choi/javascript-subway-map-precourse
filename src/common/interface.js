@@ -24,6 +24,26 @@ export function makeInputWithId(id, str) {
   return `<input id="${id}" placeholder="${str || ''}"></input>`;
 }
 
+export function makeTableHeader(...titles) {
+  const arr = [];
+  arr.push('<tr>');
+  titles.forEach((title) => {
+    arr.push(`<th><b>${title}</b></th>`);
+  });
+  arr.push('</tr>');
+  return arr.join(' ');
+}
+
+export function makeTableRow(dataName, ...contents) {
+  const arr = [];
+  arr.push(`<tr data-${dataName}="${contents[0]}">`);
+  contents.forEach((content) => {
+    arr.push(`<td>${content}</td>`);
+  });
+  arr.push('</tr>');
+  return arr.join(' ');
+}
+
 export function makeCommonMenu() {
   const $app = document.getElementById('app');
   const arr = [];

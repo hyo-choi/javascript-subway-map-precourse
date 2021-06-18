@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-undef */
 const STATIONS_LS = 'stations';
 const LINES_LS = 'lines';
@@ -16,6 +17,7 @@ export function getStations() {
   try {
     array = JSON.parse(stations);
   } catch (error) {
+    alert('localStorage data is corrupted');
     array = [];
   }
   return array;
@@ -27,6 +29,7 @@ export function getLines() {
   try {
     array = JSON.parse(lines);
   } catch (error) {
+    alert('localStorage data is corrupted');
     array = [];
   }
   return array;
