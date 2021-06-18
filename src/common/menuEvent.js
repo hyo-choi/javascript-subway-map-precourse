@@ -1,4 +1,7 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-undef */
+import toggleStationManagerDiv from '../stationManager/interface.js';
+
 const STATION_MANAGER_BUTTON = 'station-manager-button';
 const LINE_MANAGER_BUTTON = 'line-manager-button';
 const SECTION_MANAGER_BUTTON = 'section-manager-button';
@@ -8,7 +11,7 @@ function setStationManagerButton(managerObj) {
   const $button = document.getElementById(STATION_MANAGER_BUTTON);
 
   $button.addEventListener('click', () => {
-    // TODO: makeStationManagerDiv
+    toggleStationManagerDiv(managerObj);
   });
 }
 
