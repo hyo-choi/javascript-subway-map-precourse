@@ -8,13 +8,15 @@ const STATION_NAME_INPUT = 'station-name-input';
 const STATION_ADD_BUTTON = 'station-add-button';
 const STATION_DELETE_BUTTON = 'station-delete-button';
 
+const DATA_STATION_NAME = 'station-name';
+
 function makeStationRows(managerObj) {
   const arr = [];
   if (!managerObj.stations.list) {
     return '';
   }
   managerObj.stations.list.forEach((station) => {
-    arr.push(elementManager.makeTableRow('name', station.name,
+    arr.push(elementManager.makeTableRow(DATA_STATION_NAME, station.name,
       elementManager.makeButtonWithClass(STATION_DELETE_BUTTON, '삭제')));
   });
   return arr.join(' ');

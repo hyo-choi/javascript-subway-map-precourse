@@ -26,7 +26,7 @@ export function makeInputWithId(id, str) {
 
 export function makeTableHeader(...titles) {
   const arr = [];
-  arr.push('<tr>');
+  arr.push('<tr data-title="tableTitle">');
   titles.forEach((title) => {
     arr.push(`<th><b>${title}</b></th>`);
   });

@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 /* eslint-disable no-alert */
 /* eslint-disable import/extensions */
@@ -9,6 +10,10 @@ export default function StationList() {
 
   function isValidStationName(name) {
     return name.length > 1 && this.list.every((station) => station.name !== name);
+  }
+
+  function isRemovable(name, lines) {
+    return lines.list.every((line) => line.stations.every((station) => station !== name));
   }
 
   this.setLocalStorage = () => {
@@ -23,5 +28,22 @@ export default function StationList() {
     this.list.push(new Station(name));
     this.setLocalStorage();
     return name;
+  };
+
+  this.removeStation = (name, lines) => {
+    if (!isRemovable(name, lines)) {
+      alert('노선에 등록되어 있는 역은 삭제할 수 없습니다.');
+      return false;
+    }
+    if (!confirm('정말로 삭제하시겠습니까?')) {
+      return false;
+    }
+    const toBeRemoved = this.list.findIndex((element) => element.name === name);
+    if (toBeRemoved === -1) {
+      return false;
+    }
+    this.list.splice(toBeRemoved, 1);
+    this.setLocalStorage();
+    return true;
   };
 }

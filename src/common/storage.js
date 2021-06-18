@@ -32,6 +32,8 @@ export function getLines() {
     array = JSON.parse(lines);
   } catch (error) {
     alert('localStorage data is corrupted');
+  }
+  if (!array) {
     array = [];
   }
   return array;
