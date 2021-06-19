@@ -3,21 +3,36 @@
 /* eslint-disable no-alert */
 /* eslint-disable import/extensions */
 import Station from './Station.js';
-import { getStations, setStations } from '../common/storage.js';
+
+const STATIONS_LS = 'stations';
+
+function isValidStationName(name) {
+  return name.length > 1 && this.list.every((station) => station.name !== name);
+}
+
+function isRemovableStation(name, lines) {
+  return lines.list.every((line) => line.stations.every((station) => station !== name));
+}
+
+function getLocalStorage() {
+  const stations = localStorage.getItem(STATIONS_LS);
+  let array = [];
+  try {
+    array = JSON.parse(stations);
+  } catch (error) {
+    alert('localStorage data is corrupted');
+  }
+  if (!array) {
+    array = [];
+  }
+  return array;
+}
 
 export default function StationList() {
-  this.list = getStations();
-
-  function isValidStationName(name) {
-    return name.length > 1 && this.list.every((station) => station.name !== name);
-  }
-
-  function isRemovable(name, lines) {
-    return lines.list.every((line) => line.stations.every((station) => station !== name));
-  }
+  this.list = getLocalStorage();
 
   this.setLocalStorage = () => {
-    setStations(this.list);
+    localStorage.setItem(STATIONS_LS, JSON.stringify(this.list));
   };
 
   this.addStation = (name) => {
@@ -31,7 +46,7 @@ export default function StationList() {
   };
 
   this.removeStation = (name, lines) => {
-    if (!isRemovable(name, lines)) {
+    if (!isRemovableStation(name, lines)) {
       alert('노선에 등록되어 있는 역은 삭제할 수 없습니다.');
       return false;
     }
